@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 const Header = () => {
   return (
@@ -7,16 +8,16 @@ const Header = () => {
         <p className='text-center'>Welcome to Nextjs App</p>
         <ul className="flex justify-center gap-x-4">
           <li>
-            <a href="/" className='fs text-sky-700'>Home</a>
+            <Link href="/" className='fs text-sky-700'>Home</Link>
           </li>
           <li>
-            <a href="/layout" className='fs text-sky-700'>Layout</a>
+            <Link href="/layout" className='fs text-sky-700'>Layout</Link>
           </li>
           <li>
-            <a href="/about" className='fs text-sky-700'>About</a>
+            <Link href="/about" className='fs text-sky-700'>About</Link>
           </li>
           <li>
-            <a href="/contact" className='fs text-sky-700'>Contact</a>
+            <Link href="/contact" className='fs text-sky-700'>Contact</Link>
           </li>
         </ul>
       </div>
