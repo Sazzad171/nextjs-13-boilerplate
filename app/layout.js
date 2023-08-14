@@ -1,7 +1,6 @@
-"use client"
 import './globals.css';
 import { Inter } from 'next/font/google';
-import NextNProgress from 'nextjs-progressbar';
+import { TopProgressBar } from './_components/common/Functions';
 import Header from './_components/layout/Header';
 import Footer from './_components/layout/Footer';
 
@@ -16,7 +15,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <NextNProgress />
+        <TopProgressBar />
         <Header />
           {children}
         <Footer />

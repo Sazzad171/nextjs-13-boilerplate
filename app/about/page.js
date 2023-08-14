@@ -1,8 +1,13 @@
 import React from 'react';
+import { Box, Container, Typography } from '@mui/material';
 
 const page = () => {
   return (
-    <div>about page</div>
+    <Box component="main">
+      <Container>
+        <Typography textAlign={"center"}>About page</Typography>
+      </Container>
+    </Box>
   )
 }
 

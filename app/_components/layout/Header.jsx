@@ -1,3 +1,6 @@
+"use client";
+
+// packages
 import { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -9,9 +12,10 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import MobileDrawer from './MobileDrawer';
+import Link from 'next/link';
+import navItems from '../../_json/HeaderNavItems.json'
 
 const drawerWidth = 240;
-const navItems = ['Home', 'About', 'Contact'];
 
 function Header(props) {
   const { window } = props;
@@ -33,7 +37,7 @@ function Header(props) {
             component="div"
             sx={{ flexGrow: 1 }}
           >
-            Nextjs+MUI
+            <Link href={'/'}>Nextjs+MUI</Link>
           </Typography>
           <IconButton
             color="inherit"
@@ -46,8 +50,10 @@ function Header(props) {
           </IconButton>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }}>
-                {item}
+              <Button key={item.id} sx={{ color: '#fff' }}>
+                <Link href={item.link}>
+                  {item.name}
+                </Link>
               </Button>
             ))}
           </Box>

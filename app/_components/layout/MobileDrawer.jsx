@@ -6,6 +6,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import Link from 'next/link';
 
 const Drawer = ({ handleDrawerToggle, navItems }) => {
   return (
@@ -16,10 +17,10 @@ const Drawer = ({ handleDrawerToggle, navItems }) => {
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item} />
-            </ListItemButton>
+          <ListItem key={item.id}>
+            <Link href={item.link} sx={{ textAlign: 'center' }}>
+              <ListItemText primary={item.name} />
+            </Link>
           </ListItem>
         ))}
       </List>
