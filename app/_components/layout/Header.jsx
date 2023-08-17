@@ -14,6 +14,7 @@ import Button from '@mui/material/Button';
 import MobileDrawer from './MobileDrawer';
 import Link from 'next/link';
 import navItems from '../../_json/HeaderNavItems.json'
+import { useSession } from 'next-auth/react';
 
 const drawerWidth = 240;
 
@@ -26,6 +27,9 @@ function Header(props) {
   };
 
   const container = window !== undefined ? () => window().document.body : undefined;
+
+  // auth status
+  const { status } = useSession();
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -50,11 +54,23 @@ function Header(props) {
           </IconButton>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button key={item.id} sx={{ color: '#fff' }}>
-                <Link href={item.link}>
-                  {item.name}
-                </Link>
-              </Button>
+              status === "authenticated" ? (
+                item.id != 4 ?
+                <Button key={item.id} sx={{ color: '#fff' }}>
+                  <Link href={item.link}>
+                    {item.name}
+                  </Link>
+                </Button> :
+                ''
+              ) : (
+                item.id != 5 ?
+                <Button key={item.id} sx={{ color: '#fff' }}>
+                  <Link href={item.link}>
+                    {item.name}
+                  </Link>
+                </Button> :
+                ''
+              )
             ))}
           </Box>
         </Toolbar>

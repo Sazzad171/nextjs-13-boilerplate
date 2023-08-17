@@ -16,7 +16,7 @@ export default async function Home() {
     // console.log(res);
   }).catch(err => {
     // console.log(err.message);
-  })
+  });
   
   return (
     <Box component={"main"} minHeight={"85vh"}>

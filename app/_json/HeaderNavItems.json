@@ -17,6 +17,11 @@
   {
     "id": "4",
     "name": "Login",
-    "link": "/login"
+    "link": "/auth/signin"
+  },
+  {
+    "id": "5",
+    "name": "Logout",
+    "link": "/auth/logout"
   }
 ]

@@ -2,27 +2,51 @@
 
 import React, { useEffect, useState } from 'react';
 import { Box, Button, Container, Grid, TextField, Typography } from '@mui/material';
-import { signIn } from 'next-auth/react';
-import { redirect } from 'next/navigation';
+import { signIn, useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { Formik } from 'formik';
+import * as Yup from 'yup'
 
 const Signin = () => {
-  const [formData, setFormData] = useState({});
+  const router = useRouter();
+  const { data: session, status } = useSession();
+
+  // validate form
+  const signInSchema = Yup.object().shape({
+    email: Yup.string()
+      .email("Please input valid email address")
+      .required("Email is required"),
+
+    password: Yup.string()
+      .required("Password is required")
+      .min(8, 'Password must be at least 8 characters')
+  });
 
   // onsubmit form
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleFormSubmit = async (values, setSubmitting) => {
+    // trigger nextauth signin function
     const res = await signIn('credentials', {
-      email: formData.email,
-      password: formData.password,
+      email: values.email,
+      password: values.password,
       redirect: false // page won't reload
     });
 
+    setSubmitting(false);
+
     // if valid credentials then login
-    if (res.ok && res.error === null) { 
-      redirect("/");
+    if (res.ok && res.error === null) {
+      router.push("/layout");
+    } else {
+      console.log("Login failed");
     }
   }
+
+  // when logged in user then redirect to dashboard
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push("/layout");
+    }
+  }, [session]);
 
   return (
     <Box component={"main"} minHeight={"85vh"} pt={"200px"}>
@@ -31,31 +55,60 @@ const Signin = () => {
           <Grid item xs={5}>
             <Box borderRadius={4} border={1} borderColor={"#ccc"} p={4}>
               <Typography variant={"h5"} textAlign={"center"} mb={2}>Sign in to Nextjs Auth App</Typography>
-              <Box component={"form"} onSubmit={(e) => handleFormSubmit(e)}>
-                <Box mb={2}>
-                  <TextField
-                    type='email'
-                    id='email'
-                    fullWidth
-                    required
-                    label="Email"
-                    name='email'
-                    onChange={(e) => {setFormData({...formData, email: e.target.value})}}
-                  />
-                </Box>
-                <Box mb={2}>
-                  <TextField
-                    type='password'
-                    id='password'
-                    fullWidth
-                    required
-                    label="password"
-                    name='password'
-                    onChange={(e) => {setFormData({...formData, password: e.target.value})}}
-                  />
-                </Box>
-                <Button fullWidth variant="contained" sx={{background: "#aaa !important"}} type='submit'>Submit</Button>
-              </Box>
+
+              <Formik
+                initialValues={{ email: '', password: '' }}
+                validationSchema={signInSchema}
+                onSubmit={(values, { setSubmitting }) => handleFormSubmit(values, setSubmitting)}
+              >
+                {
+                  ({
+                    values,
+                    handleChange,
+                    handleSubmit,
+                    isSubmitting,
+                    errors,
+                    touched
+                  }) => (
+                    <Box component={"form"} onSubmit={handleSubmit}>
+                      <Box mb={2}>
+                        <TextField
+                          type='email'
+                          id='email'
+                          fullWidth
+                          label="Email"
+                          name='email'
+                          value={values.email}
+                          onChange={handleChange}
+                        />
+                        {
+                          errors.email && touched.email ? 
+                            <Typography color="red">{errors.email}</Typography> :
+                            ''
+                        }
+                      </Box>
+                      <Box mb={2}>
+                        <TextField
+                          type='password'
+                          id='password'
+                          fullWidth
+                          label="password"
+                          name='password'
+                          value={values.password}
+                          onChange={handleChange}
+                        />
+                        {
+                          errors.password && touched.password ? 
+                            <Typography color="red">{errors.password}</Typography> :
+                            ''
+                        }
+                      </Box>
+                      <Button fullWidth variant="contained" sx={{background: "#aaa !important"}} type='submit' disabled={isSubmitting}>Submit</Button>
+                    </Box>
+                  )
+                }
+              </Formik>
+
             </Box>
           </Grid>
         </Grid>
