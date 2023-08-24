@@ -11,3 +11,9 @@ export const getAllLayouts = () => {
   const url = "/layouts?per_page=20";
   return axiosInstance.get(url);
 }
+
+// get single layout
+export const getSingleLayout = (payload) => {
+  const url = `/layout-details?layout_id=${payload}`;
+  return axiosInstance.get(url);
+}

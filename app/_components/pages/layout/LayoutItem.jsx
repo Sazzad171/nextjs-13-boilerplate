@@ -21,7 +21,7 @@ export const LayoutItem = ({
       </CardContent>
       <CardActions>
         <Button size="small">
-          <a href={item.site_link}>View More</a>
+          <a href={`/layout-all/${item.id}`}>View More</a>
         </Button>
       </CardActions>
     </Card>
