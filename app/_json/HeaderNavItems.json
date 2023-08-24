@@ -27,6 +27,11 @@
   {
     "id": "6",
     "name": "Layouts",
-    "link": "/layout"
+    "link": "/layout-all"
+  },
+  {
+    "id": "7",
+    "name": "Dashboard",
+    "link": "/dashboard"
   }
 ]

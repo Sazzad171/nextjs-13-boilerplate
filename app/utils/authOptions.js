@@ -2,6 +2,10 @@ import Credentials from "next-auth/providers/credentials";
 import { signIn } from "../_services/axios/AuthApi";
 
 export const authOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
+  session: {
+    strategy: "jwt",
+  },
   providers: [
     Credentials({
       name: "Credentials",
@@ -18,16 +22,16 @@ export const authOptions = {
     }),
     // ..add more providers if needed
   ],
-  callbacks: {
-    jwt: async ({ token, user }) => {
-      user && (token.user = user);
-      return token;
-    },
-    session: async ({ session, token }) => {
-      session.user = token.user;  // Setting token in session
-      return session;
-    },
-  },
+  // callbacks: {
+  //   jwt: async ({ token, user }) => {
+  //     user && (token.user = user);
+  //     return token;
+  //   },
+  //   session: async ({ session, token }) => {
+  //     session.user = token.user;  // Setting token in session
+  //     return session;
+  //   },
+  // },
   pages: {
     signIn: "/auth/signin",
   }

@@ -24,29 +24,36 @@ const Signin = () => {
 
   // onsubmit form
   const handleFormSubmit = async (values, setSubmitting) => {
-    // trigger nextauth signin function
-    const res = await signIn('credentials', {
-      email: values.email,
-      password: values.password,
-      redirect: false // page won't reload
-    });
+    try {
+      // trigger nextauth signin function
+      const res = await signIn('credentials', {
+        email: values.email,
+        password: values.password,
+        redirect: false // page won't reload
+      });
 
-    setSubmitting(false);
+      setSubmitting(false);
 
-    // if valid credentials then login
-    if (res.ok && res.error === null) {
-      router.push("/layout");
-    } else {
-      console.log("Login failed");
+      // if valid credentials then login
+      if (res.ok && res.error === null) {
+        console.log("login status i", res);
+        router.push("/dashboard");
+      } else {
+        console.log("Login failed");
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 
   // when logged in user then redirect to dashboard
   useEffect(() => {
-    if (status === "authenticated") {
-      router.push("/layout");
+    if (session?.user) {
+      console.log("login status", status);
+      console.log("session", session);
+      router.push("/dashboard");
     }
-  }, [session]);
+  }, [session, router]);
 
   return (
     <Box component={"main"} minHeight={"85vh"} pt={"200px"}>

@@ -1,26 +1,28 @@
 import React from 'react';
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
 
-export const LayoutItem = () => {
+export const LayoutItem = ({
+  item
+}) => {
   return (
     <Card>
       <CardMedia
         sx={{ height: 140 }}
-        image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
+        image={item.banner}
         title="green iguana"
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Lizard
+        <Typography gutterBottom variant="h5">
+          {item.title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+          Created: {item.created_times_ago}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+        <Button size="small">
+          <a href={item.site_link}>View More</a>
+        </Button>
       </CardActions>
     </Card>
   )

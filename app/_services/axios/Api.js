@@ -11,15 +11,15 @@ axiosInstance.defaults.baseURL = `${process.env.API_URL}`;
 // console.log("session", session);
 
 // if logged in user so set header authorization bearer token
-axiosInstance.interceptors.request.use(async (config) => {
-  const session = await getSession();
+// axiosInstance.interceptors.request.use(async (config) => {
+//   const session = await getSession();
 
-  console.log("session:", session);
+//   console.log("session:", session);
 
-  if (session) {
-    config.headers.Authorization = `Bearer ${session?.user.token}`
-  }
-  return config;
-});
+//   if (session) {
+//     config.headers.Authorization = `Bearer ${session?.user.token}`
+//   }
+//   return config;
+// });
 
 export default axiosInstance;

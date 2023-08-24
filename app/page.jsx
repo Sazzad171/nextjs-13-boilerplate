@@ -2,7 +2,7 @@ import { Box, Container, Typography } from '@mui/material';
 import { getLayoutCategories } from './_services/axios/AllServerSideApi';
 import { authOptions } from './utils/authOptions';
 import { getServerSession } from 'next-auth';
-import { redirect } from 'next/navigation';
+// import { redirect } from 'next/navigation';
 
 export default async function Home() {
 

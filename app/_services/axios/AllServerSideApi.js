@@ -5,3 +5,9 @@ export const getLayoutCategories = () => {
   const url = "/categories";
   return axiosInstance.get(url);
 }
+
+// get layouts
+export const getAllLayouts = () => {
+  const url = "/layouts?per_page=20";
+  return axiosInstance.get(url);
+}
