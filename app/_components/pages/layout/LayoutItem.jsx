@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
+import Link from 'next/link';
 
 export const LayoutItem = ({
   item
@@ -21,7 +22,7 @@ export const LayoutItem = ({
       </CardContent>
       <CardActions>
         <Button size="small">
-          <a href={`/layout-all/${item.id}`}>View More</a>
+          <Link href={`/layout-all/${item.id}`}>View More</Link>
         </Button>
       </CardActions>
     </Card>
