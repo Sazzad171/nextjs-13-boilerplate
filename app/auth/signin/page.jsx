@@ -35,7 +35,7 @@ const Signin = () => {
       setSubmitting(false);
 
       // if valid credentials then login
-      if (res.ok && res.error === null) {
+      if (res?.ok && res?.error === null) {
         console.log("login status i", res);
         router.push("/dashboard");
       } else {
