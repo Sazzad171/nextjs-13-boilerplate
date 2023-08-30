@@ -9,11 +9,16 @@ const Logout = () => {
   const router = useRouter();
 
   useEffect(() => {
-    signOut({
-      redirect: false
-    });
-
-    router.push('/auth/signin');
+    try {
+      signOut({
+        redirect: false
+      });
+  
+      router.push('/auth/signin');
+    }
+    catch (err) {
+      console.log(err);
+    }
   }, []);
 
   return (
