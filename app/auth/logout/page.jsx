@@ -9,16 +9,19 @@ const Logout = () => {
   const router = useRouter();
 
   useEffect(() => {
-    try {
-      signOut({
-        redirect: false
-      });
-  
-      router.push('/auth/signin');
+    const signoutApp = async () => {
+      try {
+        await signOut({
+          redirect: false
+        });
+    
+        router.push('/auth/signin');
+      }
+      catch (err) {
+        console.log(err);
+      }
     }
-    catch (err) {
-      console.log(err);
-    }
+    signoutApp();
   }, []);
 
   return (

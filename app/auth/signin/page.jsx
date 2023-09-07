@@ -39,7 +39,7 @@ const Signin = () => {
         console.log("login status i", res);
         router.push("/dashboard");
       } else {
-        console.log("Login failed");
+        console.log("Login failed", res);
       }
     } catch (error) {
       console.log(error);
@@ -53,7 +53,7 @@ const Signin = () => {
       console.log("session", session);
       router.push("/dashboard");
     }
-  }, [session, router]);
+  }, [session]);
 
   return (
     <Box component={"main"} minHeight={"85vh"} pt={"200px"}>

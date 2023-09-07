@@ -17,3 +17,9 @@ export const getSingleLayout = (payload) => {
   const url = `/layout-details?layout_id=${payload}`;
   return axiosInstance.get(url);
 }
+
+// get current user
+export const getCurrentUser = async () => {
+  const url = '/user/GetCurrentUser';
+  return await axiosInstance.get(url);
+}
