@@ -3,6 +3,7 @@
 import React from 'react';
 import { Box, Container, Typography } from '@mui/material';
 import { getCurrentUser } from '../_services/axios/AllServerSideApi';
+import useUserStore from '../_services/store/useUserStore';
 
 const Dashboard = () => {
 
@@ -11,9 +12,14 @@ const Dashboard = () => {
   //   console.log("user:", userRes.data);
   // }, []);
 
+  const setUserData = useUserStore(state => state.setUserInfo);
+
   const fetchData = async () => {
     const userRes = await getCurrentUser();
     console.log("user:", userRes.data);
+
+    // set user data to global state
+    setUserData(userRes.data);
   }
 
   return (
